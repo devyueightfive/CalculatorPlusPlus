@@ -15,10 +15,11 @@
 #define BINARYEVALUATOR_H
 #include "Evaluator.h"
 
-class BinaryEvaluator {
+class BinaryEvaluator : Evaluator {
 public:
     BinaryEvaluator();
-    
+    double double calculate(string simpleExpression) override;
+
     virtual ~BinaryEvaluator();
 private:
 

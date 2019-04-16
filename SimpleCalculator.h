@@ -64,6 +64,19 @@ public:
     const string PATTERN_OF_LOW_PRIORITY_BINARY_OPERATOR
             = "(\\+|-)";
 
+    const string PATTERN_OF_OPERATOR
+            = "("
+            + PATTERN_OF_HIGH_PRIORITY_BINARY_OPERATOR
+            + "|"
+            + PATTERN_OF_LOW_PRIORITY_BINARY_OPERATOR
+            + "|"
+            + PATTERN_OF_COMPARISON_OPERATOR
+            + "|"
+            + PATTERN_OF_HIGH_PRIORITY_LOGICAL_OPERATOR
+            + "|"
+            + PATTERN_OF_LOW_PRIORITY_LOGICAL_OPERATOR
+            + ")";
+
     /**
      * Pattern represents simple comparison expression.
      */

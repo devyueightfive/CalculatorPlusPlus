@@ -16,7 +16,18 @@
 BinaryEvaluator::BinaryEvaluator() {
 }
 
-
+double BinaryEvaluator::calculate(string simpleExpression) {
+    regex pattern = regex(SimpleCalculator::);
+    smatch matches;
+    bool found = regex_search(expression, matches, pattern);
+    if (found == false) {
+        break;
+    }
+    
+    string left = ;
+    string right = ;
+    string left = ;
+}
 
 BinaryEvaluator::~BinaryEvaluator() {
 }
