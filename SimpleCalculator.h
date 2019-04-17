@@ -14,149 +14,94 @@
 #ifndef SIMPLECALCULATOR_H
 #define SIMPLECALCULATOR_H
 #include <string>
-using namespace std;
 
 class SimpleCalculator {
 public:
-    const string PATTERN_OF_FLOAT_NUMBER
-            = "([-]?[0-9]*\\.?[0-9]+"
-            + "|"
-            + "[-]?[0-9]+\\.?[0-9]*)";
 
-    const string PATTERN_OF_ORDINAL_NUMBER_IN_CACHE
-            = "("
-            + "\\{[0-9]+\\}"
-            + ")";
+    /*
+     * Pattern of float number (with point)
+     */
+    static const std::string PATTERN_OF_FLOAT_NUMBER;
 
-    const string PATTERN_OF_NUMBER
-            = "("
-            + PATTERN_OF_FLOAT_NUMBER
-            + "|"
-            + PATTERN_OF_ORDINAL_NUMBER_IN_CACHE
-            + ")";
+    /*
+     * Pattern of ordinal number in cache of calculated values
+     */
+    static const std::string PATTERN_OF_ORDINAL_NUMBER_IN_CACHE;
+
+    /*
+     * Pattern of value (float number or ordinal number in cache)
+     */
+    static const std::string PATTERN_OF_NUMBER;
 
     /**
-     * Pattern represents logic high priority operator.
+     * Pattern of  high priority logic operator.
      */
-    const string PATTERN_OF_HIGH_PRIORITY_LOGICAL_OPERATOR
-            = "(&)";
+    static const std::string PATTERN_OF_HIGH_PRIORITY_LOGICAL_OPERATOR;
+
     /**
-     * Pattern represents logic low priority operator.
+     * Pattern of low priority logic operator.
      */
-    const string PATTERN_OF_LOW_PRIORITY_LOGICAL_OPERATOR
-            = "(\\|)";
+    static const std::string PATTERN_OF_LOW_PRIORITY_LOGICAL_OPERATOR;
 
     /**
      * Pattern represents comparison operators.
      */
-    const string PATTERN_OF_COMPARISON_OPERATOR
-            = "(<=|>=|>|<|==|!=)";
+    static const std::string PATTERN_OF_COMPARISON_OPERATOR;
 
     /**
      * Pattern represents two binary operators: multiply and division.
      */
-    const string PATTERN_OF_HIGH_PRIORITY_BINARY_OPERATOR
-            = "(\\*|/)";
+    static const std::string PATTERN_OF_HIGH_PRIORITY_BINARY_OPERATOR;
 
     /**
      * Pattern represents two binary operators: plus and minus.
      */
-    const string PATTERN_OF_LOW_PRIORITY_BINARY_OPERATOR
-            = "(\\+|-)";
+    static const std::string PATTERN_OF_LOW_PRIORITY_BINARY_OPERATOR;
 
-    const string PATTERN_OF_OPERATOR
-            = "("
-            + PATTERN_OF_HIGH_PRIORITY_BINARY_OPERATOR
-            + "|"
-            + PATTERN_OF_LOW_PRIORITY_BINARY_OPERATOR
-            + "|"
-            + PATTERN_OF_COMPARISON_OPERATOR
-            + "|"
-            + PATTERN_OF_HIGH_PRIORITY_LOGICAL_OPERATOR
-            + "|"
-            + PATTERN_OF_LOW_PRIORITY_LOGICAL_OPERATOR
-            + ")";
+    static const std::string PATTERN_OF_OPERATOR;
 
     /**
      * Pattern represents simple comparison expression.
      */
-    const string PATTERN_OF_COMPARISON_EXPRESSION
-            = "("
-            + PATTERN_OF_NUMBER
-            + PATTERN_OF_COMPARISON_OPERATOR
-            + PATTERN_OF_NUMBER
-            + ")";
+    static const std::string PATTERN_OF_COMPARISON_EXPRESSION;
+
     /**
      * Pattern represents simple expression with low logical operator.
      */
-    const string PATTERN_OF_LOW_PRIORITY_LOGICAL_EXPRESSION
-            = "("
-            + PATTERN_OF_NUMBER
-            + PATTERN_OF_LOW_PRIORITY_LOGICAL_OPERATOR
-            + PATTERN_OF_NUMBER
-            + ")";
+    static const std::string PATTERN_OF_LOW_PRIORITY_LOGICAL_EXPRESSION;
     /**
      * Pattern represents simple expression with low logical operator.
      */
-    const string PATTERN_OF_HIGH_PRIORITY_LOGICAL_EXPRESSION
-            = "("
-            + PATTERN_OF_NUMBER
-            + PATTERN_OF_HIGH_PRIORITY_LOGICAL_OPERATOR
-            + PATTERN_OF_NUMBER
-            + ")";
+    static const std::string PATTERN_OF_HIGH_PRIORITY_LOGICAL_EXPRESSION;
     /**
      * Pattern represents simple ternary expression.
      */
-    const string PATTERN_OF_TERNARY_EXPRESSION
-            = "("
-            + PATTERN_OF_NUMBER
-            + "\\?"
-            + PATTERN_OF_NUMBER
-            + ":"
-            + PATTERN_OF_NUMBER
-            + ")";
+    static const std::string PATTERN_OF_TERNARY_EXPRESSION;
 
     /**
      * Pattern represents simple binary expression with multiply and division
      * operators.
      */
-    const string PATTERN_OF_HIGH_PRIORITY_BINARY_EXPRESSION
-            = "("
-            + PATTERN_OF_NUMBER
-            + PATTERN_OF_HIGH_PRIORITY_BINARY_OPERATOR
-            + PATTERN_OF_NUMBER
-            + ")";
+    static const std::string PATTERN_OF_HIGH_PRIORITY_BINARY_EXPRESSION;
     /**
      * Pattern represents simple binary expression with plus and minus
      * operators.
      */
-    const string PATTERN_OF_LOW_PRIORITY_BINARY_EXPRESSION
-            = "("
-            + PATTERN_OF_NUMBER
-            + PATTERN_OF_LOW_PRIORITY_BINARY_OPERATOR
-            + PATTERN_OF_NUMBER
-            + ")";
+    static const std::string PATTERN_OF_LOW_PRIORITY_BINARY_EXPRESSION;
     /**
      * Pattern represents simple expression. The expression with only one pair
      * of parentheses.
      */
-    const string PATTERN_OF_SIMPLE_PARENTHESES
-            = "("
-            + "\\("
-            + "[^\\(^\\)]*"
-            + PATTERN_OF_NUMBER
-            + "[^\\(^\\)]*"
-            + "\\)"
-            + ")";
+    static const std::string PATTERN_OF_SIMPLE_PARENTHESES;
 
 
 
     SimpleCalculator();
 
     /*
-     * Evaluates string expression
+     * Evaluates a string expression
      */
-    virtual double calculate(string simpleExpression);
+    virtual double calculate(std::string simpleExpression);
 
     virtual ~SimpleCalculator();
 private:
