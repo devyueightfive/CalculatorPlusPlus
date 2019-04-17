@@ -14,19 +14,32 @@
 #ifndef BINARYEXPRESSION_H
 #define BINARYEXPRESSION_H
 
-#include <string>
+#include "SimpleCalculator.h"
 
 class BinaryExpression {
 public:
     double leftOperand;
     double rightOperand;
     std::string operation;
-    BinaryExpression();
-    BinaryExpression(std::string left, std::string right, std::string op);
-    virtual ~BinaryExpression();
-private:
 
+    /*
+     * Constructor from strings
+     * */
+    BinaryExpression(std::string *leftOperand, std::string *rightOperand, std::string *operation);
+
+    /*
+     * Factory from string
+     */
+    static BinaryExpression toBinary(std::string simpleExpression);
+
+    /*
+     * String representation
+     */
+    std::string toString();
+
+    ~BinaryExpression();
+
+private:
 };
 
 #endif /* BINARYEXPRESSION_H */
-
