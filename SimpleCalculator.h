@@ -13,6 +13,7 @@
 
 #ifndef SIMPLECALCULATOR_H
 #define SIMPLECALCULATOR_H
+
 #include <string>
 
 class SimpleCalculator {
@@ -95,7 +96,9 @@ public:
     static const std::string PATTERN_OF_SIMPLE_PARENTHESES;
 
 
-
+    /*
+     * Constructor
+     */
     SimpleCalculator();
 
     /*
@@ -103,7 +106,8 @@ public:
      */
     virtual double calculate(std::string simpleExpression);
 
-    virtual ~SimpleCalculator();
+    ~SimpleCalculator();
+
 private:
 
 };

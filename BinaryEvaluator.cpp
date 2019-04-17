@@ -10,24 +10,36 @@
  * 
  * Created on April 16, 2019, 5:28 PM
  */
-
 #include "BinaryEvaluator.h"
 
-BinaryEvaluator::BinaryEvaluator() {
+
+BinaryEvaluator::BinaryEvaluator(std::string pattern, std::vector<double> *cache)
+        : Evaluator(pattern, cache) {
+
 }
 
-double BinaryEvaluator::calculate(string simpleExpression) {
-    regex pattern = regex(SimpleCalculator::);
-    smatch matches;
-    bool found = regex_search(expression, matches, pattern);
-    if (found == false) {
-        break;
+double BinaryEvaluator::calculate(std::string simpleExpression) {
+    BinaryExpression be = BinaryExpression::toBinary(simpleExpression);
+    double leftOperand = be.leftOperand;
+    double rightOperand = be.rightOperand;
+    std::string operation = be.operation;
+
+    if (operation == "*") {
+        return leftOperand * rightOperand;
     }
-    
-    string left = ;
-    string right = ;
-    string left = ;
+    if (operation == "/") {
+        if (rightOperand == 0) return 0;
+        return leftOperand / rightOperand;
+    }
+    if (operation == "+") {
+        return leftOperand + rightOperand;
+    }
+    if (operation == "-") {
+        return leftOperand - rightOperand;
+    }
+
 }
+
 
 BinaryEvaluator::~BinaryEvaluator() {
 }

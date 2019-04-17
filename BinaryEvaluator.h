@@ -13,14 +13,17 @@
 
 #ifndef BINARYEVALUATOR_H
 #define BINARYEVALUATOR_H
+
 #include "Evaluator.h"
+#include "BinaryExpression.h"
 
 class BinaryEvaluator : Evaluator {
 public:
-    BinaryEvaluator();
-    double double calculate(string simpleExpression) override;
+    BinaryEvaluator(std::string pattern, std::vector<double>* cache);
 
-    virtual ~BinaryEvaluator();
+    double calculate(std::string simpleExpression) override;
+
+    ~BinaryEvaluator();
 private:
 
 };

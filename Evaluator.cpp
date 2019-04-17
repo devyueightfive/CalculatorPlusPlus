@@ -14,57 +14,58 @@
 #include <sstream>
 #include <regex>
 #include "Evaluator.h"
+#include <string>
 
-Evaluator::Evaluator(string pattern, vector<double>& cache) {
+Evaluator::Evaluator(std::string pattern, std::vector<double>* cache) : SimpleCalculator() {
     this->patternOfOperation = pattern;
     this->cache = cache;
 }
 
-string Evaluator::evaluate(string& expression) {
-    //try find simple expression with given pattern of operator
+std::string* Evaluator::evaluate(std::string* expression) {
+    //infinite loop (breaking on not found simple expression)
     while (true) {
-        regex pattern = regex(this->patternOfOperation);
-        smatch matches;
-        bool found = regex_search(expression, matches, pattern);
+        //try find simple expression with given pattern of operator
+        std::regex operation_regex = std::regex(this->patternOfOperation);
+        std::smatch operation_matches;
+        bool found = std::regex_search(*expression, operation_matches, operation_regex);
         if (found == false) {
             break;
         }
         //for every found simple expression calculate it
-        double value = this->calculate(matches[0]);
+        double value = this->calculate(operation_matches[0].str());
         //save in cache
-        this->cache.push_back(value);
-        int ordinal_number = cache.size() - 1;
-        int start_position = expression.find(matches[0]);
+        (*this->cache).push_back(value);
+        int ordinal_number = std::string(operation_matches.prefix().str()).length();
+        int start_position = (*expression).find(operation_matches[0].str());
         //replace simple expression with ordinal number in cache of calculated values
         //cache helps save accuracy of calculated values
-        expression.replace(
+        (*expression).replace(
                 start_position,
-                matches[0].str().length(),
+                operation_matches[0].str().length(),
                 "{" + std::to_string(ordinal_number) + "}"
                 );
     }
     return expression;
 }
 
-string Evaluator::toCalculatedExpression(string& expression) {
+std::string* Evaluator::toCalculatedExpression(std::string* expression) {
     //try find simple expression with given pattern of operator
     while (true) {
-        regex operation_pattern = regex(Evaluator::PATTERN_OF_ORDINAL_NUMBER_IN_CACHE);
-        smatch operation_matches;
-        bool found = regex_search(expression, operation_matches, operation_pattern);
+        std::regex operation_pattern = std::regex(Evaluator::PATTERN_OF_ORDINAL_NUMBER_IN_CACHE);
+        std::smatch operation_matches;
+        bool found = regex_search(*expression, operation_matches, operation_pattern);
         if (found == false) {
             break;
         }
-        smatch ordinal_number_matches;
-        regex_search(operation_matches[0].str(), ordinal_number_matches, regex("([0-9]+)"));
+        
         int ordinal_number;
-        stringstream(ordinal_number_matches[0].str())>>ordinal_number;
-        int start_position = expression.find(operation_matches[0].str());
+        ordinal_number = std::stoi(std::string(operation_matches[0]).substr(1, std::string(operation_matches[0]).length()-2));
+        int start_position = (*expression).find(operation_matches[0].str());
         //replace simple expression with ordinal number in cache of calculated values
-        expression.replace(
+        (*expression).replace(
                 start_position,
                 operation_matches[0].str().length(),
-                std::to_string(this->cache[ordinal_number])
+                std::to_string((*this->cache)[ordinal_number])
                 );
     }
     return expression;

@@ -10,36 +10,22 @@
  *
  * Created on April 16, 2019, 10:46 AM
  */
+
+
+#include<string>
 #include <iostream>
-#include <string>
-#include <vector>
-#include <exception>
-using namespace std;
-int square(int);
+#include "BinaryExpression.h"
 
 /*
  * 
  */
 int main() {
-    std::cout << "Hello, world!\n";
-    int x = 9;
-    int a=0;
-    double b;
-    try{
-        b = x/a;
-        cout << "result of division is\t" << b;
-    }
-    catch(exception& е){
-        cerr << " runtime error : " << e.what() << ' \n ';
-        cout<<"Division on zero!!!";
-        return 1;
-    }
-    
+    std::string myString = "-13.4562+-456.4578";
+    std::string result = BinaryExpression::toBinary(myString).toString();
+    std::cout << result;
     return 0;
 }
 
-int square(int x) {
-    return x*x;
-}
+
 
 

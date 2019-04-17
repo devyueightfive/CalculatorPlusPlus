@@ -19,23 +19,23 @@
 class Evaluator : SimpleCalculator {
 public:
     //pattern of operation
-    string patternOfOperation;
+    std::string patternOfOperation = NULL;
     //cache helps save accuracy of calculated values
-    vector<double>& cache;
+    std::vector<double>* cache = NULL;
 
-    Evaluator(string pattern, vector<double>& cache);
+    Evaluator(std::string pattern, std::vector<double>* cache);
 
     /*
      * Evaluates expression by operator given by patternOfOperation.
      * Calculations by operator saves in cache.
      * Calculated values in expression are replaced by ordinal numbers in cache 
      */
-    string evaluate(string& expression);
+    std::string* evaluate(std::string* expression);
 
     /*
      * Replaces ordinal numbers by values in cache
      */
-    string toCalculatedExpression(string& expression);
+    std::string* toCalculatedExpression(std::string* expression);
 
     virtual ~Evaluator();
 private:
